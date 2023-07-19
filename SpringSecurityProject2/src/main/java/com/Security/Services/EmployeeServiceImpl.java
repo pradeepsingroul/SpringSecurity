@@ -1,11 +1,13 @@
 package com.Security.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Security.Exceptions.EmployeeExceptions;
+import com.Security.Models.Department;
 import com.Security.Models.Employee;
 import com.Security.Repository.EmployeeRepo;
 
@@ -19,11 +21,16 @@ public class EmployeeServiceImpl implements EmployeeServices{
 	
 	@Override
 	public Employee registerEmployee(Employee employee) throws EmployeeExceptions {
-		Employee empl = emplRepo.findByEmail(employee.getEmail());
-		if(empl == null) {
-			employee.getDepartments().getEmployees().add(employee);
+		
+		Optional<Employee> opt = emplRepo.findByEmail(employee.getEmail());
+		
+		if(opt.isEmpty()) {
+//			System.out.println("+++++++++++");
+			Department dept =  employee.getDepartments();
+			dept.getEmployees().add(employee);
 			return emplRepo.save(employee);
 		}else {
+			
 			throw new EmployeeExceptions("Employee is already exist eith the email :" + employee.getEmail()); 
 		}
 		

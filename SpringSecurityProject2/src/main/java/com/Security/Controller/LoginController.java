@@ -16,20 +16,20 @@ import com.Security.Repository.EmployeeRepo;
 
 
 @RestController
-@RequestMapping("/employees")
 public class LoginController {
 	
 	@Autowired
     private EmployeeRepo studentRepository;
     
-    @GetMapping("/signin")
+    @GetMapping("/employees/signin")
     public ResponseEntity<Employee> getloggenInStudentDetailsHandler(Authentication auth){
-        Employee student = studentRepository.findByEmail(auth.getName());
-        if(student!=null){
-            return new ResponseEntity<>(student, HttpStatus.OK);
-        }else{
-            throw new BadCredentialsException("Student does not exist..");
-        }
+    	
+    	System.out.println(auth);
+    	
+        Employee employee = studentRepository.findByEmail(auth.getName()).orElseThrow(() -> new BadCredentialsException("Student does not exist.."));
+        
+        return new ResponseEntity<Employee>(employee,HttpStatus.ACCEPTED);
+     
     }
 
 }

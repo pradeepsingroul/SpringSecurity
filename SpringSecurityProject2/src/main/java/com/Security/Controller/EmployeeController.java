@@ -16,7 +16,7 @@ import com.Security.Models.Employee;
 import com.Security.Services.EmployeeServices;
 
 @RestController
-@RequestMapping("/employees")
+
 public class EmployeeController {
 
 	@Autowired
@@ -25,14 +25,14 @@ public class EmployeeController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@PostMapping("")
+	@PostMapping("/employees")
 	public ResponseEntity<Employee> registerEmployeeHanlder(@RequestBody Employee employee){
 		employee.setPassword(passwordEncoder.encode(employee.getPassword()));
 		Employee empl = emplService.registerEmployee(employee);
 		return new ResponseEntity<Employee>(empl,HttpStatus.CREATED);
 	}
 	
-	@GetMapping("")
+	@GetMapping("/employees")
 	public ResponseEntity<List<Employee>> getallEmployees(){
 		List<Employee> empl = emplService.getAllStudents();
 		return new ResponseEntity<List<Employee>>(empl,HttpStatus.CREATED);

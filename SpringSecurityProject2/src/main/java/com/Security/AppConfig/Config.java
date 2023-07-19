@@ -14,14 +14,13 @@ public class Config {
 
  	@Bean
  	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
- 		 http.authorizeHttpRequests().requestMatchers("/employees")
+ 		 http.authorizeHttpRequests().requestMatchers(HttpMethod.POST,"/employees")
          .permitAll()
          .anyRequest()
          .authenticated()
          .and()
-         .csrf()
-         .disable()
-         .formLogin()//
+         .csrf().disable()
+         .formLogin()
          .and()
          .httpBasic();
 
