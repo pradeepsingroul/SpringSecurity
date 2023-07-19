@@ -20,7 +20,7 @@ public class AppConfig {
                 .and()
                 .csrf()
                 .disable()
-                .formLogin()
+                .formLogin()//
                 .and()
                 .httpBasic();
 

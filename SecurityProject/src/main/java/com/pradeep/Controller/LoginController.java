@@ -17,6 +17,7 @@ public class LoginController {
 
     @Autowired
     private StudentRepository studentRepository;
+    
     @GetMapping("/students/signin")
     public ResponseEntity<Student> getloggenInStudentDetailsHandler(Authentication auth){
         Optional<Student> student = studentRepository.findByEmail(auth.getName());

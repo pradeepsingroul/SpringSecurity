@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +37,7 @@ public class UserController {
 
     }
     @GetMapping("/students/{email}")
-    public ResponseEntity<Student> getStudentById(String email){
+    public ResponseEntity<Student> getStudentById(@PathVariable(name = "email") String email){
         Student student1 = studentService.getStudentByEmailHandler(email);
         return new ResponseEntity<>(student1, HttpStatus.OK);
 

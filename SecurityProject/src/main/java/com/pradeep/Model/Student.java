@@ -6,12 +6,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Student {
 
     @Id
@@ -22,6 +26,7 @@ public class Student {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+    
     private String studentName;
 
     private int marks;
